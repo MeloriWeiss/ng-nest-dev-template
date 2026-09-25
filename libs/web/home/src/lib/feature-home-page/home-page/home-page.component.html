@@ -1,0 +1,210 @@
+<main class="home">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="container hero__layout">
+      <div class="hero__content">
+        <p class="eyebrow"><span></span> Карты, в которых начинаются истории</p>
+        <h1 id="hero-title">
+          Создай мир,<br />
+          <em>который запомнят</em>
+        </h1>
+        <p class="hero__lead">
+          Собирайте атмосферные карты для настольных ролевых игр из готовых
+          текстур, делитесь ими с сообществом и ведите игроков навстречу
+          приключениям.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" routerLink="/workshop">
+            Открыть мастерскую
+            <svg icon="arrow" aria-hidden="true"></svg>
+          </a>
+          <a class="button button--ghost" routerLink="/maps"
+            >Исследовать карты</a
+          >
+        </div>
+        <ul class="hero__proof" aria-label="Возможности редактора">
+          <li><span aria-hidden="true">✦</span> Работает в браузере</li>
+          <li><span aria-hidden="true">✦</span> Экспорт в высоком качестве</li>
+        </ul>
+      </div>
+
+      <div class="atlas" aria-label="Интерактивный атлас возможностей">
+        <div class="atlas__orbit atlas__orbit--outer" aria-hidden="true"></div>
+        <div class="atlas__orbit atlas__orbit--inner" aria-hidden="true"></div>
+        <div class="atlas__map">
+          <img
+            src="/assets/imgs/old-map-card.png"
+            width="590"
+            height="590"
+            alt="Фэнтезийная карта, созданная в GameMaster Helper"
+          />
+          <span class="atlas__fog" aria-hidden="true"></span>
+          <a
+            class="hotspot hotspot--one"
+            routerLink="/maps"
+            aria-label="Посмотреть карты сообщества"
+          >
+            <span></span>
+            <strong>Карты сообщества</strong>
+          </a>
+          <a
+            class="hotspot hotspot--two"
+            routerLink="/texture-packs"
+            aria-label="Открыть наборы текстур"
+          >
+            <span></span>
+            <strong>Текстур-паки</strong>
+          </a>
+          <a
+            class="hotspot hotspot--three"
+            routerLink="/workshop"
+            aria-label="Начать создание карты"
+          >
+            <span></span>
+            <strong>Начать здесь</strong>
+          </a>
+        </div>
+        <div class="atlas__badge atlas__badge--top" aria-hidden="true">
+          <span>01</span> МИР СОЗДАН
+        </div>
+        <div class="atlas__badge atlas__badge--bottom" aria-hidden="true">
+          <span>∞</span> ИСТОРИЙ ВПЕРЕДИ
+        </div>
+      </div>
+    </div>
+
+    <div class="container hero__stats" aria-label="Преимущества платформы">
+      <div><strong>4K</strong><span>экспорт карт</span></div>
+      <div><strong>∞</strong><span>пространство для идей</span></div>
+      <div><strong>1</strong><span>живое сообщество</span></div>
+      <p>От первого наброска<br />до целого мира</p>
+    </div>
+  </section>
+
+  <section class="story container" aria-labelledby="story-title">
+    <header class="section-heading">
+      <p class="eyebrow"><span></span> Твой путь</p>
+      <h2 id="story-title">
+        Всё необходимое,<br /><em>чтобы оживить идею</em>
+      </h2>
+    </header>
+    <ol class="story__steps">
+      <li>
+        <span class="story__number">01</span>
+        <div class="story__icon" aria-hidden="true">⌖</div>
+        <h3>Набросай мир</h3>
+        <p>Расставляй ландшафты, дороги и детали в удобном онлайн-редакторе.</p>
+      </li>
+      <li>
+        <span class="story__number">02</span>
+        <div class="story__icon" aria-hidden="true">◇</div>
+        <h3>Добавь атмосферу</h3>
+        <p>
+          Используй текстур-паки сообщества для любого сеттинга и настроения.
+        </p>
+      </li>
+      <li>
+        <span class="story__number">03</span>
+        <div class="story__icon" aria-hidden="true">↗</div>
+        <h3>Поделись историей</h3>
+        <p>Публикуй работу, собирай отзывы и вдохновляй других мастеров.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="featured" aria-labelledby="featured-title">
+    <div class="container">
+      <header class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow"><span></span> Атлас сообщества</p>
+          <h2 id="featured-title">
+            Миры, открытые<br /><em>для приключений</em>
+          </h2>
+        </div>
+        <a class="text-link" routerLink="/maps"
+          >Смотреть весь каталог <span>→</span></a
+        >
+      </header>
+
+      @if (featuredMaps$ | async; as mapsPage) {
+        @if (mapsPage.items.length) {
+          <div class="featured__grid">
+            @for (map of mapsPage.items; track map.id; let index = $index) {
+              <article
+                class="world-card"
+                [class.world-card--large]="index === 0"
+              >
+                <a
+                  routerLink="/workshop"
+                  [queryParams]="{ viewMapId: map.id }"
+                  class="world-card__visual"
+                >
+                  <img
+                    src="/assets/imgs/old-map-card.png"
+                    [alt]="'Карта «' + map.name + '»'"
+                  />
+                  <span class="world-card__index">0{{ index + 1 }}</span>
+                  <span class="world-card__open" aria-hidden="true">↗</span>
+                </a>
+                <div class="world-card__info">
+                  <div>
+                    <p>Автор: {{ map.author.nickname }}</p>
+                    <h3>
+                      <a
+                        routerLink="/workshop"
+                        [queryParams]="{ viewMapId: map.id }"
+                      >
+                        {{ map.name }}
+                      </a>
+                    </h3>
+                  </div>
+                  <dl>
+                    <div>
+                      <dt>Нравится</dt>
+                      <dd>♥ {{ map.likesCount }}</dd>
+                    </div>
+                    <div>
+                      <dt>Обсуждают</dt>
+                      <dd>{{ map.commentsCount }}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </article>
+            }
+          </div>
+        } @else {
+          <div class="featured__empty">
+            <div class="featured__compass" aria-hidden="true">✦</div>
+            <div>
+              <h3>Атлас ждёт первооткрывателей</h3>
+              <p>
+                Создайте и опубликуйте карту — она может стать первой в
+                подборке.
+              </p>
+            </div>
+            <a class="button button--primary" routerLink="/workshop"
+              >Создать карту</a
+            >
+          </div>
+        }
+      }
+    </div>
+  </section>
+
+  <section class="manifesto container" aria-labelledby="manifesto-title">
+    <div class="manifesto__mark" aria-hidden="true">GM</div>
+    <div>
+      <p class="eyebrow"><span></span> Для тех, кто ведёт за собой</p>
+      <h2 id="manifesto-title">
+        Ваша история заслуживает<br /><em>собственного мира</em>
+      </h2>
+      <p>
+        Неважно, готовите ли вы первую игру или ведёте кампанию много лет.
+        GameMaster Helper освобождает время для главного — вашей истории.
+      </p>
+      <a class="button button--dark" routerLink="/workshop"
+        >Начать путешествие <span>→</span></a
+      >
+    </div>
+  </section>
+</main>
