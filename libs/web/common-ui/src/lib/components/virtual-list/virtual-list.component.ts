@@ -26,7 +26,7 @@ interface VisibleItem<T> {
 }
 
 @Component({
-  selector: 'wm-virtual-list',
+  selector: 'sl-virtual-list',
   imports: [NgTemplateOutlet],
   templateUrl: './virtual-list.component.html',
   styleUrl: './virtual-list.component.scss',

@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
-import { MapsService, MapSummary } from '@wm/web/data-access/maps';
+import { MapsService, MapSummary } from '@sl/web/data-access/maps';
 import {
   ConfirmationModalComponent,
   EmptyStateComponent,
@@ -17,13 +17,13 @@ import {
   SuccessToastComponent,
   SvgComponent,
   ToastService,
-} from '@wm/web/common-ui';
+} from '@sl/web/common-ui';
 import { firstValueFrom } from 'rxjs';
 
 type MapList = 'drafts' | 'published';
 
 @Component({
-  selector: 'wm-profile-page-maps',
+  selector: 'sl-profile-page-maps',
   imports: [RouterLink, EmptyStateComponent, SvgComponent],
   templateUrl: './profile-page-maps.component.html',
   styleUrl: './profile-page-maps.component.scss',

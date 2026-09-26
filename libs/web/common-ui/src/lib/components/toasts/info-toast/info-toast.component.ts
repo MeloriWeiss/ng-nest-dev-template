@@ -9,7 +9,7 @@ import { ToastBaseComponent } from '../toast-base/toast-base.component';
 import { ToastComponent } from '../toast.interface';
 
 @Component({
-  selector: 'wm-info-toast',
+  selector: 'sl-info-toast',
   imports: [ToastBaseComponent],
   templateUrl: './info-toast.component.html',
   styleUrl: './info-toast.component.scss',

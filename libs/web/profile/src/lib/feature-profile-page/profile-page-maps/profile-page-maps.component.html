@@ -68,7 +68,7 @@
   @if (isLoading()) {
     <div class="state-card">Загружаем карты…</div>
   } @else if (visibleMaps().length === 0) {
-    <wm-empty-state
+    <sl-empty-state
       [title]="
         activeList() === 'drafts'
           ? 'Черновиков пока нет'
@@ -87,7 +87,7 @@
           >Создать первую карту</a
         >
       }
-    </wm-empty-state>
+    </sl-empty-state>
   } @else {
     <section class="cards" role="tabpanel">
       @for (map of visibleMaps(); track map.id) {

@@ -8,12 +8,12 @@ import {
 import { SELECT_HOST } from './select.token';
 
 @Component({
-  selector: 'wm-option',
+  selector: 'sl-option',
   template: '<ng-content />',
   host: {
     role: 'option',
     '[attr.aria-selected]': 'selected()',
-    '[class.wm-option--selected]': 'selected()',
+    '[class.sl-option--selected]': 'selected()',
     '(click)': 'choose()',
   },
   styleUrl: './select-option.component.scss',

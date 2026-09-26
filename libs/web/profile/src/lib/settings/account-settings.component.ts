@@ -15,12 +15,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { authConfig } from '@wm/shared/auth';
-import { validatePassword } from '@wm/web/auth';
-import { AccountSettingsStore } from '@wm/web/data-access/auth';
+import { authConfig } from '@sl/shared/auth';
+import { validatePassword } from '@sl/web/auth';
+import { AccountSettingsStore } from '@sl/web/data-access/auth';
 
 @Component({
-  selector: 'wm-account-settings',
+  selector: 'sl-account-settings',
   standalone: true,
   imports: [ReactiveFormsModule, DatePipe, RouterLink],
   providers: [AccountSettingsStore],
@@ -60,6 +60,7 @@ export class AccountSettingsComponent {
     this.form.markAllAsTouched();
     if (this.form.invalid) return;
     const { currentPassword, newPassword } = this.form.getRawValue();
+
     this.store
       .changePassword({ currentPassword, newPassword })
       .pipe(takeUntilDestroyed(this.#destroyRef))

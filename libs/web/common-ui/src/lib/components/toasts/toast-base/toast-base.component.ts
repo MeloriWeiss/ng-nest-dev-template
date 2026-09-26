@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
 @Component({
-  selector: 'wm-toast-base',
+  selector: 'sl-toast-base',
   imports: [],
   templateUrl: './toast-base.component.html',
   styleUrl: './toast-base.component.scss',

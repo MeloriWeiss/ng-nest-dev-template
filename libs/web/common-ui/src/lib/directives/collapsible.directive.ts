@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[wmCollapsible]',
+  selector: '[slCollapsible]',
 })
 export class CollapsibleDirective implements AfterViewInit, OnDestroy {
   #elementRef = inject<ElementRef<HTMLElement>>(ElementRef);

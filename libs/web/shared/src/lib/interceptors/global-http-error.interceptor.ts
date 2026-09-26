@@ -1,8 +1,8 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 import { inject } from '@angular/core';
-import { ErrorToastComponent, ToastService } from '@wm/web/common-ui';
-import { BYPASS_GLOBAL_ERROR } from '@wm/web/data-access/shared';
+import { ErrorToastComponent, ToastService } from '@sl/web/common-ui';
+import { BYPASS_GLOBAL_ERROR } from '@sl/web/data-access/shared';
 
 export const globalHttpErrorInterceptor: HttpInterceptorFn = (req, next) => {
   const toastService = inject(ToastService);

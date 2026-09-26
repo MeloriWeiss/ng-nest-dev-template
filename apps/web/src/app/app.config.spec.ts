@@ -8,8 +8,8 @@ import {
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { AuthService } from '@wm/web/data-access/auth';
-import { ErrorToastComponent, ToastService } from '@wm/web/common-ui';
+import { AuthService } from '@sl/web/data-access/auth';
+import { ErrorToastComponent, ToastService } from '@sl/web/common-ui';
 import { of } from 'rxjs';
 import { appHttpInterceptors } from './app.config';
 

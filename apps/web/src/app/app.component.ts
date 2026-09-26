@@ -1,9 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavigationManagerComponent } from '@wm/web/shared';
-import { ModalHostComponent, ToastHostComponent } from '@wm/web/common-ui';
-import { SiteVisitTrackerService } from './site-visit-tracker.service';
-import { RouterScrollService } from './router-scroll.service';
+import { NavigationManagerComponent } from '@sl/web/shared';
+import { ModalHostComponent, ToastHostComponent } from '@sl/web/common-ui';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +15,4 @@ import { RouterScrollService } from './router-scroll.service';
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  readonly #siteVisitTracker = inject(SiteVisitTrackerService);
-
-  constructor() {
-    inject(RouterScrollService);
-    this.#siteVisitTracker.track();
-  }
-}
+export class AppComponent {}

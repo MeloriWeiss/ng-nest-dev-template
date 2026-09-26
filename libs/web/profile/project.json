@@ -2,7 +2,7 @@
   "name": "web-profile",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web/profile/src",
-  "prefix": "wm",
+  "prefix": "sl",
   "projectType": "library",
   "tags": [],
   "targets": {

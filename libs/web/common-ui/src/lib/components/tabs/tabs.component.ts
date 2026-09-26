@@ -13,7 +13,7 @@ export interface TabItem {
 }
 
 @Component({
-  selector: 'wm-tabs',
+  selector: 'sl-tabs',
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',

@@ -2,7 +2,7 @@
   "name": "web-common-ui",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web/common-ui/src",
-  "prefix": "wm",
+  "prefix": "sl",
   "projectType": "library",
   "tags": [],
   "targets": {

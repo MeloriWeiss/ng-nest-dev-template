@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { BehaviorSubject, tap } from 'rxjs';
-import { GetSessionsDto } from '@wm/shared/auth';
-import { UserResponseDto } from '@wm/shared/users';
+import { GetSessionsDto } from '@sl/shared/auth';
+import { UserResponseDto } from '@sl/shared/users';
 import { LoginData, RegisterData } from '../interfaces';
-import { DefaultResponseDto } from '@wm/shared/common';
+import { DefaultResponseDto } from '@sl/shared/common';
 import { Router } from '@angular/router';
 import { API_CONFIG, BYPASS_GLOBAL_ERROR } from '../../shared';
 import { CurrentAccountStore } from '../../profile';

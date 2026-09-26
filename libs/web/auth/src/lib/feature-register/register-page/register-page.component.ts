@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormInputComponent,
   LabeledFormFieldWrapperComponent,
-} from '@wm/web/common-ui';
-import { LabeledCheckboxComponent } from '@wm/web/common-ui';
+} from '@sl/web/common-ui';
+import { LabeledCheckboxComponent } from '@sl/web/common-ui';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   FormControl,
@@ -11,18 +11,18 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { AuthService, RegisterData } from '@wm/web/data-access/auth';
+import { AuthService, RegisterData } from '@sl/web/data-access/auth';
 import {
   validateEmail,
   validatePassword,
   validateUsername,
 } from '../../validators';
-import { authConfig } from '@wm/shared/auth';
+import { authConfig } from '@sl/shared/auth';
 import { firstValueFrom, tap } from 'rxjs';
 import { authReturnUrl } from '../../auth/auth-return-url';
 
 @Component({
-  selector: 'wm-signup-page',
+  selector: 'sl-signup-page',
   imports: [
     FormInputComponent,
     LabeledCheckboxComponent,

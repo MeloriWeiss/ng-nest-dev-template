@@ -3,8 +3,8 @@ import {
   canActivateNonAuth,
   LoginPageComponent,
   RegisterPageComponent,
-} from '@wm/web/auth';
-import { AuthLayoutComponent } from '@wm/web/layout/auth';
+} from '@sl/web/auth';
+import { AuthLayoutComponent } from '@sl/web/layout/auth';
 
 export const authRoutes: Routes = [
   {

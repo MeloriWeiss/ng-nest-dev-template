@@ -9,7 +9,7 @@ import { ToastBaseComponent } from '../toast-base/toast-base.component';
 import { ToastComponent } from '../toast.interface';
 
 @Component({
-  selector: 'wm-error-toast',
+  selector: 'sl-error-toast',
   imports: [ToastBaseComponent],
   templateUrl: './error-toast.component.html',
   styleUrl: './error-toast.component.scss',

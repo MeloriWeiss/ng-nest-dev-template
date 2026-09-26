@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { ProfileSummaryDto } from '@wm/shared/accounts';
-import { UserResponseDto } from '@wm/shared/users';
+import { ProfileSummaryDto } from '@sl/shared/accounts';
+import { UserResponseDto } from '@sl/shared/users';
 import { Subject } from 'rxjs';
 import { ProfileService } from '../services';
 import { CurrentAccountStore } from './current-account.store';

@@ -6,12 +6,12 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { PrismaMainService } from '@wm/api/database-main';
+import { PrismaMainService } from '@sl/api/database-main';
 import * as bcrypt from 'bcrypt';
 import { RegisterDto } from '../dto';
 import { JwtTokenPayload, UserMeta } from '../interfaces';
 import { jwtConfig } from '../jwt';
-import { UserStatus } from '@wm/shared/users';
+import { UserStatus } from '@sl/shared/users';
 import { randomUUID } from 'node:crypto';
 import { refreshTokenDigest } from '../utils/refresh-token-hash';
 import { ChangePasswordDto } from '../dto/change-password.dto';

@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   displayName: 'web-profile',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],

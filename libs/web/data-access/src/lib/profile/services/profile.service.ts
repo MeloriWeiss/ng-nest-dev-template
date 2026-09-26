@@ -4,7 +4,7 @@ import {
   AccountResponseDto,
   ProfileSummaryDto,
   UpdateAccountRequestDto,
-} from '@wm/shared/accounts';
+} from '@sl/shared/accounts';
 import { map } from 'rxjs';
 import { API_CONFIG } from '../../shared';
 import { PublishedMapSummary } from '../../maps';

@@ -1,5 +1,5 @@
 import { SetMetadata } from '@nestjs/common';
-import { UserRoleType } from '@wm/shared/users';
+import { UserRoleType } from '@sl/shared/users';
 
 export const REQUIRED_ROLES = 'requiredRoles';
 

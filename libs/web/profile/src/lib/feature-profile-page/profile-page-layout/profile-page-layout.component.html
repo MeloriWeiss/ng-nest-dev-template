@@ -3,13 +3,13 @@
     <div class="profile-header">
       <div class="profile__user">
         @if (isOwnProfile && isEditing()) {
-          <wm-popover
+          <sl-popover
             #avatarMenu
             alignment="start"
             ariaLabel="Действия с аватаром"
           >
             <button
-              wmPopoverTrigger
+              slPopoverTrigger
               class="profile__avatar-button"
               type="button"
               aria-haspopup="menu"
@@ -30,7 +30,7 @@
               </span>
             </button>
 
-            <div wmPopoverContent class="profile__avatar-menu">
+            <div slPopoverContent class="profile__avatar-menu">
               <button
                 type="button"
                 role="menuitem"
@@ -47,7 +47,7 @@
                 Удалить изображение
               </button>
             </div>
-          </wm-popover>
+          </sl-popover>
           <input
             #avatarInput
             class="profile__avatar-input"
@@ -108,7 +108,7 @@
   </div>
 
   @if (!isEditing()) {
-    <wm-tabs
+    <sl-tabs
       class="profile__nav"
       [tabs]="profileTabs"
       ariaLabel="Разделы профиля"

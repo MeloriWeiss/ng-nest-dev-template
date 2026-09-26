@@ -17,7 +17,7 @@ export interface SearchableSelectOption<T> {
 }
 
 @Component({
-  selector: 'wm-searchable-select',
+  selector: 'sl-searchable-select',
   imports: [ClickOutsideDirective],
   templateUrl: './searchable-select.component.html',
   styleUrl: './searchable-select.component.scss',

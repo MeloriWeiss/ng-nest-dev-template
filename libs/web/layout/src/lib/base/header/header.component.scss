@@ -100,7 +100,7 @@
     }
   }
 
-  wm-popover.library-active .library-trigger {
+  sl-popover.library-active .library-trigger {
     background-color: var(--light-color-30);
   }
 
@@ -335,12 +335,12 @@ body.header__right-side.is-open {
 }
 
 @include mobile-above {
-  wm-popover.library-active .library-trigger {
+  sl-popover.library-active .library-trigger {
     background-color: var(--light-color-30);
   }
 }
 
-wm-popover.library-active .header__nav-link.library-trigger {
+sl-popover.library-active .header__nav-link.library-trigger {
   @include mobile {
     @include flex-center();
     padding: rem(10) rem(60);

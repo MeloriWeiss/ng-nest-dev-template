@@ -3,12 +3,12 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request } from 'express';
 import { ConfigService } from '@nestjs/config';
-import { PrismaMainService } from '@wm/api/database-main';
+import { PrismaMainService } from '@sl/api/database-main';
 import * as bcrypt from 'bcrypt';
 import { jwtConfig, jwtStrategies } from '../consts';
 import { extractFromCookie } from '../../utils';
 import { JwtTokenPayload, RefreshPayload } from '../../interfaces';
-import { UserStatus } from '@wm/shared/users';
+import { UserStatus } from '@sl/shared/users';
 import { refreshTokenDigest } from '../../utils/refresh-token-hash';
 
 @Injectable()

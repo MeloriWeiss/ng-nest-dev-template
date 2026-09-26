@@ -1,4 +1,4 @@
-import { UserRoleType } from '@wm/shared/users';
+import { UserRoleType } from '@sl/shared/users';
 
 export interface AccessPayload {
   userId: number;

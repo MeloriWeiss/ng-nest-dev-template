@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   displayName: 'web-common-ui',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],

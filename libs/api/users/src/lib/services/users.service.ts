@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaMainService } from '@wm/api/database-main';
-import { UserResponseDto } from '@wm/shared/users';
+import { PrismaMainService } from '@sl/api/database-main';
+import { UserResponseDto } from '@sl/shared/users';
 
 @Injectable()
 export class UsersService {

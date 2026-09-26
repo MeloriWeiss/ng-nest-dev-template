@@ -6,10 +6,10 @@ import { PopoverComponent } from './popover.component';
 @Component({
   imports: [PopoverComponent],
   template: `
-    <wm-popover>
-      <button wmPopoverTrigger type="button">Open</button>
-      <a wmPopoverContent href="/">Profile</a>
-    </wm-popover>
+    <sl-popover>
+      <button slPopoverTrigger type="button">Open</button>
+      <a slPopoverContent href="/">Profile</a>
+    </sl-popover>
   `,
 })
 class TestHostComponent {}

@@ -16,7 +16,7 @@ import { ToastBaseComponent } from '../toast-base/toast-base.component';
 import { ToastComponent } from '../toast.interface';
 
 @Component({
-  selector: 'wm-success-toast',
+  selector: 'sl-success-toast',
   imports: [ToastBaseComponent],
   templateUrl: './success-toast.component.html',
   styleUrl: './success-toast.component.scss',

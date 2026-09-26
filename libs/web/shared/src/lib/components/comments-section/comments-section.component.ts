@@ -5,12 +5,12 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { CommentComponent, CommentInputComponent } from '@wm/web/common-ui';
+import { CommentComponent, CommentInputComponent } from '@sl/web/common-ui';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommentItem } from '@wm/web/data-access/shared';
+import { CommentItem } from '@sl/web/data-access/shared';
 
 @Component({
-  selector: 'wm-comments-section',
+  selector: 'sl-comments-section',
   imports: [ReactiveFormsModule, CommentInputComponent, CommentComponent],
   templateUrl: './comments-section.component.html',
   styleUrl: './comments-section.component.scss',

@@ -1,5 +1,5 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
-import { authConfig } from '@wm/shared/auth';
+import { authConfig } from '@sl/shared/auth';
 
 const usernameConfig = authConfig.username;
 

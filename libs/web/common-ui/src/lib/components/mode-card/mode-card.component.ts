@@ -4,14 +4,14 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { Mode } from '@wm/web/data-access/mods';
+import { Mode } from '@sl/web/data-access/mods';
 import { CollapsibleDirective } from '../../directives/index';
 import { ImagesSliderComponent, SvgComponent } from '../index';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'wm-mode-card',
+  selector: 'sl-mode-card',
   imports: [
     SvgComponent,
     CarouselModule,

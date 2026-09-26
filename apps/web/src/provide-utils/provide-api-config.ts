@@ -1,6 +1,6 @@
 import { environment } from '../environments/environment';
 import { Provider } from '@angular/core';
-import { API_CONFIG } from '@wm/web/data-access/shared';
+import { API_CONFIG } from '@sl/web/data-access/shared';
 
 export const provideApiConfig = (): Provider => {
   return {

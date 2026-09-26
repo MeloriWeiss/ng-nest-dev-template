@@ -16,7 +16,7 @@ Updated: 2026-09-14. Keep this file short; update only on explicit user request.
 - Product: GameMaster Helper, tools for tabletop-RPG game masters and world authors.
 - Nx monorepo: Angular 19 web, NestJS 11 API, Prisma/PostgreSQL; Yarn 4.
 - Apps: apps/web and apps/api. Feature libraries: `libs/web/<library>` and `libs/api/<library>`.
-- Platform Nx names: web-<library>, api-<library>; aliases @wm/web/<library>, @wm/api/<library>.
+- Platform Nx names: web-<library>, api-<library>; aliases @sl/web/<library>, @sl/api/<library>.
 - Shared contracts: libs/shared/shared. Naming validation command: yarn lint:workspace; explicit request required during experimental mode.
 - Prisma schema/migrations: libs/api/database-main/src/lib/prisma.
 - Web HTTP services/state: libs/web/data-access. Shared UI: libs/web/common-ui.
@@ -67,14 +67,14 @@ Updated: 2026-09-14. Keep this file short; update only on explicit user request.
 
 - Standard forum buttons must match the profile: opacity-only hover, no shadow/translation/filter. Use .forum-button; the global .button has unwanted hover effects. Admin is the reference for the non-search select, not buttons.
 - Rounded topic/message cards; common-ui PaginationComponent/PaginationService. Page changes clear the comment permalink parameter; visible pagination no longer allocates every page in large result sets.
-- Reuse common-ui selects. Forum editor category uses wm-select/wm-option without search; state and validation stay in its existing form/store.
+- Reuse common-ui selects. Forum editor category uses sl-select/sl-option without search; state and validation stay in its existing form/store.
 - common-ui AvatarComponent renders the image or an initial fallback. Forum list mapping retains avatarUrl; the current user's avatar comes from CurrentAccountStore when the profile is loaded.
 - API avatarPublicUrl in libs/api/accounts converts stored keys to versioned /api/accounts/profiles/:userId/avatar URLs. AvatarsService and forum responses share it. Never use storage keys as image URLs.
 - Forum/admin inputs use common-ui field-focus SCSS mixin: no outline, focus indicated by border color.
 - List/thread loading follows NavigationEnd and relevant parameter changes, ignoring fragment-only and unrelated query changes. Same-discussion content remains visible during reload.
 - Editor draft writes are debounced by 400 ms and flushed on pagehide/destruction; successful publication cancels pending writes.
 - App RouterScrollService owns scroll handling. app.config disables built-in restoration/anchor actions but keeps router Scroll events. Forum list/section/thread routes opt into preserveScrollOnQueryChange: same-path query changes retain position. Other forward navigation scrolls to top; history restores position; fragments target anchors.
-- common-ui RouteAnchorDirective (wmRouteAnchor) handles asynchronously rendered comment/composer targets afterNextRender, excluding popstate navigation.
+- common-ui RouteAnchorDirective (slRouteAnchor) handles asynchronously rendered comment/composer targets afterNextRender, excluding popstate navigation.
 - Persistent forum lag was repeatedly reported. Extra requests, per-keystroke storage writes and scroll jumps were addressed in code, but the actual persistent-lag cause and runtime improvement remain unconfirmed without browser observation.
 
 ## Account settings and latest UI, September 14

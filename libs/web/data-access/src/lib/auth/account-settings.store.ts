@@ -8,7 +8,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpErrorResponse } from '@angular/common/http';
 import { finalize, tap } from 'rxjs';
-import { GetSessionsDto } from '@wm/shared/auth';
+import { GetSessionsDto } from '@sl/shared/auth';
 import { AuthService } from './services';
 import { describeSessionDevice } from './session-device';
 

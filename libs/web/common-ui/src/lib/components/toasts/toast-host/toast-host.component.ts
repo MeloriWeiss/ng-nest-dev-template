@@ -8,7 +8,7 @@ import {
 import { ToastService } from '../toast.service';
 
 @Component({
-  selector: 'wm-toast-host',
+  selector: 'sl-toast-host',
   imports: [],
   templateUrl: './toast-host.component.html',
   styleUrl: './toast-host.component.scss',

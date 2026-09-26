@@ -6,8 +6,8 @@ import { jwtConfig, jwtStrategies } from '../consts';
 import { extractFromCookie } from '../../utils';
 import { AccessPayload, JwtTokenPayload } from '../../interfaces';
 import { Request } from 'express';
-import { PrismaMainService } from '@wm/api/database-main';
-import { UserStatus } from '@wm/shared/users';
+import { PrismaMainService } from '@sl/api/database-main';
+import { UserStatus } from '@sl/shared/users';
 
 @Injectable()
 export class JwtAccessStrategy extends PassportStrategy(

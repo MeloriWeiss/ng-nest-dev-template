@@ -15,7 +15,7 @@ import { SELECT_HOST, SelectHost } from './select.token';
 let selectId = 0;
 
 @Component({
-  selector: 'wm-select',
+  selector: 'sl-select',
   imports: [ClickOutsideDirective],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
@@ -28,7 +28,7 @@ let selectId = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent implements SelectHost {
-  readonly optionsId = `wm-select-options-${selectId++}`;
+  readonly optionsId = `sl-select-options-${selectId++}`;
   readonly options = contentChildren(SelectOptionComponent);
 
   value = input<string | null>(null);

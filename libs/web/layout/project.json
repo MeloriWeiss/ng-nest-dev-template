@@ -2,7 +2,7 @@
   "name": "web-layout",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/web/layout/src",
-  "prefix": "wm",
+  "prefix": "sl",
   "projectType": "library",
   "tags": [],
   "targets": {

@@ -13,7 +13,7 @@ import {
   take,
   throwError,
 } from 'rxjs';
-import { AuthService } from '@wm/web/data-access/auth';
+import { AuthService } from '@sl/web/data-access/auth';
 
 const isRefreshing$ = new BehaviorSubject<boolean>(false);
 

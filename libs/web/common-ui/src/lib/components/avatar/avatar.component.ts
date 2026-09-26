@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'wm-avatar',
+  selector: 'sl-avatar',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

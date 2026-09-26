@@ -1,8 +1,8 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { SvgComponent } from '@wm/web/common-ui';
-import { MapsService, PublishedMapPage } from '@wm/web/data-access/maps';
+import { SvgComponent } from '@sl/web/common-ui';
+import { MapsService, PublishedMapPage } from '@sl/web/data-access/maps';
 import { catchError, of } from 'rxjs';
 
 const EMPTY_MAP_PAGE: PublishedMapPage = {
@@ -13,7 +13,7 @@ const EMPTY_MAP_PAGE: PublishedMapPage = {
 };
 
 @Component({
-  selector: 'wm-home-page',
+  selector: 'sl-home-page',
   imports: [AsyncPipe, RouterLink, SvgComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',

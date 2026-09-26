@@ -8,10 +8,10 @@ import {
 } from '@angular/core';
 import { ModalService } from '../base-modal/modal.service';
 import { BaseModalComponent } from '../base-modal/base-modal.component';
-import { ModalClose } from '@wm/web/data-access/shared';
+import { ModalClose } from '@sl/web/data-access/shared';
 
 @Component({
-  selector: 'wm-confirmation-modal',
+  selector: 'sl-confirmation-modal',
   imports: [BaseModalComponent],
   templateUrl: './confirmation-modal.component.html',
   styleUrl: './confirmation-modal.component.scss',

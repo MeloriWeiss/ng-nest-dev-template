@@ -35,11 +35,11 @@
 
   <div class="comment__replies">
     @for (reply of comment().replies; track reply.id) {
-      <wm-comment
+      <sl-comment
         [comment]="reply"
         [depth]="depth() + 1"
         (replyRequested)="replyRequested.emit($event)"
-      ></wm-comment>
+      ></sl-comment>
     }
   </div>
 </div>

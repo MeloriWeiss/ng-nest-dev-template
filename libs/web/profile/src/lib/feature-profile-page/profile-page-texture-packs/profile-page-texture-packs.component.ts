@@ -1,13 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  TexturePackCatalogPageComponent,
-  TexturePacksPageComponent,
-} from '@wm/web/texture-packs';
 
 @Component({
-  selector: 'wm-profile-page-texture-packs',
-  imports: [TexturePackCatalogPageComponent, TexturePacksPageComponent],
+  selector: 'sl-profile-page-texture-packs',
+  imports: [],
   templateUrl: './profile-page-texture-packs.component.html',
   styleUrl: './profile-page-texture-packs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

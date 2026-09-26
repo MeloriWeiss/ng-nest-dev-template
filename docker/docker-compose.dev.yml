@@ -1,3 +1,5 @@
+name: sport-link
+
 services:
   db:
     container_name: maindb

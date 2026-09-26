@@ -1,11 +1,11 @@
-<div wmClickOutside (wmClickOutside)="close()" class="popover-root">
+<div slClickOutside (slClickOutside)="close()" class="popover-root">
   <div
     (click)="toggle()"
     (keydown.escape)="close()"
     class="popover-trigger"
     tabindex="-1"
   >
-    <ng-content select="[wmPopoverTrigger]"></ng-content>
+    <ng-content select="[slPopoverTrigger]"></ng-content>
   </div>
 
   @if (isOpen()) {
@@ -21,7 +21,7 @@
       tabindex="-1"
       role="menu"
     >
-      <ng-content select="[wmPopoverContent]"></ng-content>
+      <ng-content select="[slPopoverContent]"></ng-content>
     </div>
   }
 </div>

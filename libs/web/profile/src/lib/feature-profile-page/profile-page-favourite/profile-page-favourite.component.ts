@@ -13,20 +13,20 @@ import {
   EmptyStateComponent,
   ModalService,
   SvgComponent,
-} from '@wm/web/common-ui';
-import { MapsService } from '@wm/web/data-access/maps';
+} from '@sl/web/common-ui';
+import { MapsService } from '@sl/web/data-access/maps';
 import {
   FavouriteMap,
   FavouriteTexturePack,
   ProfileService,
-} from '@wm/web/data-access/profile';
-import { TexturePacksService } from '@wm/web/data-access/texture-packs';
+} from '@sl/web/data-access/profile';
+import { TexturePacksService } from '@sl/web/data-access/texture-packs';
 import { finalize, firstValueFrom } from 'rxjs';
 
 type FavouriteFilter = 'all' | 'maps' | 'texture-packs';
 
 @Component({
-  selector: 'wm-profile-page-favourite',
+  selector: 'sl-profile-page-favourite',
   imports: [EmptyStateComponent, RouterLink, SvgComponent],
   templateUrl: './profile-page-favourite.component.html',
   styleUrl: './profile-page-favourite.component.scss',

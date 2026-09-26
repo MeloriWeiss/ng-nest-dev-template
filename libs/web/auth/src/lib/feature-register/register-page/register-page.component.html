@@ -2,8 +2,8 @@
   <h1 class="registration-header">Регистрация</h1>
 
   <div class="registration-body">
-    <wm-labeled-form-field-wrapper label="Имя">
-      <wm-form-input placeholder="Введите имя" formControlName="username">
+    <sl-labeled-form-field-wrapper label="Имя">
+      <sl-form-input placeholder="Введите имя" formControlName="username">
         <div class="control-error-block" errorBlock>
           <span class="control-error-text">{{
             registerForm.controls.username.getError(
@@ -11,11 +11,11 @@
             )?.message
           }}</span>
         </div>
-      </wm-form-input>
-    </wm-labeled-form-field-wrapper>
+      </sl-form-input>
+    </sl-labeled-form-field-wrapper>
 
-    <wm-labeled-form-field-wrapper label="Адрес электронной почты">
-      <wm-form-input
+    <sl-labeled-form-field-wrapper label="Адрес электронной почты">
+      <sl-form-input
         placeholder="Введите адрес электронной почты"
         formControlName="email"
       >
@@ -25,11 +25,11 @@
               ?.message
           }}</span>
         </div>
-      </wm-form-input>
-    </wm-labeled-form-field-wrapper>
+      </sl-form-input>
+    </sl-labeled-form-field-wrapper>
 
-    <wm-labeled-form-field-wrapper label="Пароль">
-      <wm-form-input
+    <sl-labeled-form-field-wrapper label="Пароль">
+      <sl-form-input
         placeholder="Введите пароль"
         type="password"
         [showPasswordToggle]="true"
@@ -42,12 +42,12 @@
             )?.message
           }}</span>
         </div>
-      </wm-form-input>
-    </wm-labeled-form-field-wrapper>
+      </sl-form-input>
+    </sl-labeled-form-field-wrapper>
 
-    <wm-labeled-checkbox
+    <sl-labeled-checkbox
       label="Я согласен с политикой конфиденциальности"
-    ></wm-labeled-checkbox>
+    ></sl-labeled-checkbox>
 
     <button class="button" type="submit">Зарегистрироваться</button>
   </div>

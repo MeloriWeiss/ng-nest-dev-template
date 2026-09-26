@@ -23,12 +23,12 @@ import {
   TabItem,
   TabsComponent,
   ToastService,
-} from '@wm/web/common-ui';
+} from '@sl/web/common-ui';
 import {
   CurrentAccountStore,
   ProfileService,
-} from '@wm/web/data-access/profile';
-import { ProfileSummaryDto } from '@wm/shared/accounts';
+} from '@sl/web/data-access/profile';
+import { ProfileSummaryDto } from '@sl/shared/accounts';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { filter, finalize, firstValueFrom, map } from 'rxjs';
 
@@ -43,7 +43,7 @@ const emptySummary: ProfileSummaryDto = {
 };
 
 @Component({
-  selector: 'wm-profile-page-layout',
+  selector: 'sl-profile-page-layout',
   imports: [
     RouterOutlet,
     RouterLink,

@@ -7,7 +7,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { authConfig } from '@wm/shared/auth';
+import { authConfig } from '@sl/shared/auth';
 
 export class ChangePasswordDto {
   @ApiProperty()

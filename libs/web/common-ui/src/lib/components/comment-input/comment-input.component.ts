@@ -10,7 +10,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SvgComponent } from '../svg/svg.component';
 
 @Component({
-  selector: 'wm-comment-input',
+  selector: 'sl-comment-input',
   imports: [ReactiveFormsModule, SvgComponent],
   templateUrl: './comment-input.component.html',
   styleUrl: './comment-input.component.scss',

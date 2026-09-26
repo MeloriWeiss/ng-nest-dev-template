@@ -17,11 +17,11 @@ import { finalize } from 'rxjs';
 import {
   CurrentAccountStore,
   ProfileService,
-} from '@wm/web/data-access/profile';
-import { SuccessToastComponent, ToastService } from '@wm/web/common-ui';
+} from '@sl/web/data-access/profile';
+import { SuccessToastComponent, ToastService } from '@sl/web/common-ui';
 
 @Component({
-  selector: 'wm-profile-page-edit',
+  selector: 'sl-profile-page-edit',
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './profile-page-edit.component.html',
   styleUrl: './profile-page-edit.component.scss',

@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'wm-toggle',
+  selector: 'sl-toggle',
   templateUrl: './toggle.component.html',
   styleUrl: './toggle.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

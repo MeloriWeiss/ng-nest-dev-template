@@ -9,11 +9,11 @@
 }
 
 :host(:hover),
-:host(.wm-option--selected) {
+:host(.sl-option--selected) {
   background-color: rgb(from var(--bg-surface-variant-color) r g b / 70%);
   color: var(--text-light-color);
 }
 
-:host(.wm-option--selected) {
+:host(.sl-option--selected) {
   font-weight: 700;
 }

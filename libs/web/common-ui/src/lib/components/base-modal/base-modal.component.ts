@@ -8,7 +8,7 @@ import {
 import { ModalService } from './modal.service';
 
 @Component({
-  selector: 'wm-base-modal',
+  selector: 'sl-base-modal',
   standalone: true,
   imports: [],
   templateUrl: './base-modal.component.html',

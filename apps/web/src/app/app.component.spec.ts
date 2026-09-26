@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { SiteVisitTrackerService } from './site-visit-tracker.service';
 
 describe('AppComponent (shell with NavigationManagerComponent)', () => {
   let component: AppComponent;
@@ -11,12 +10,6 @@ describe('AppComponent (shell with NavigationManagerComponent)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [
-        {
-          provide: SiteVisitTrackerService,
-          useValue: { track: jest.fn() },
-        },
-      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -32,7 +25,7 @@ describe('AppComponent (shell with NavigationManagerComponent)', () => {
   it('should render NavigationManagerComponent placeholder', () => {
     const host: HTMLElement = fixture.nativeElement;
 
-    const nav = host.querySelector('wm-navigation-manager');
+    const nav = host.querySelector('sl-navigation-manager');
     expect(nav).not.toBeNull();
   });
 });

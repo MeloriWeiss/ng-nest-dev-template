@@ -69,7 +69,7 @@
       "outputs": ["{options.outputPath}"]
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@angular/build:dev-server",
       "options": {
         "proxyConfig": "apps/web/proxy-conf.json"
       },

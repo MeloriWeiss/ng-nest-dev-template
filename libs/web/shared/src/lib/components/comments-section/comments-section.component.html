@@ -1,11 +1,11 @@
 <section class="comments__section">
   <p class="comments-section__title">Комментарии:</p>
 
-  <wm-comment-input
+  <sl-comment-input
     class="comments-section__input"
     placeholder="Оставить комментарий..."
     (submitted)="submit($event)"
-  ></wm-comment-input>
+  ></sl-comment-input>
 
   @if (replyTo()) {
     <button class="cancel-reply" type="button" (click)="replyTo.set(null)">
@@ -15,11 +15,11 @@
 
   @if (comments()) {
     @for (comment of comments(); track comment.id) {
-      <wm-comment
+      <sl-comment
         [comment]="comment"
         [depth]="0"
         (replyRequested)="replyTo.set($event)"
-      ></wm-comment>
+      ></sl-comment>
     }
   }
 </section>

@@ -4,7 +4,7 @@ import { HeaderComponent } from '../../base/header/header.component';
 import { FooterComponent } from '../../base/footer/footer.component';
 
 @Component({
-  selector: 'wm-auth-layout',
+  selector: 'sl-auth-layout',
   imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './auth-layout.component.html',
   styleUrl: './auth-layout.component.scss',

@@ -9,17 +9,15 @@ import {
   withInMemoryScrolling,
 } from '@angular/router';
 import { routes } from './app.routes';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   HttpInterceptorFn,
   provideHttpClient,
-  withFetch,
   withInterceptors,
 } from '@angular/common/http';
-import { authInitializer, authInterceptor } from '@wm/web/auth';
+import { authInitializer, authInterceptor } from '@sl/web/auth';
 import { provideApiConfig } from '../provide-utils/provide-api-config';
-import { globalHttpErrorInterceptor } from '@wm/web/shared';
-import { SEO_CONFIG, SeoService } from '@wm/web/shared';
+import { globalHttpErrorInterceptor } from '@sl/web/shared';
+import { SEO_CONFIG, SeoService } from '@sl/web/shared';
 import { TitleStrategy } from '@angular/router';
 import { environment } from '../environments/environment';
 
@@ -35,19 +33,17 @@ export const appConfig: ApplicationConfig = {
       routes,
       withComponentInputBinding(),
       withInMemoryScrolling({
-        // RouterScrollService applies the route-specific scroll policy.
         scrollPositionRestoration: 'disabled',
         anchorScrolling: 'disabled',
       }),
     ),
-    provideHttpClient(withInterceptors(appHttpInterceptors), withFetch()),
+    provideHttpClient(withInterceptors(appHttpInterceptors)),
     provideAppInitializer(authInitializer),
-    provideAnimations(),
     provideApiConfig(),
     {
       provide: SEO_CONFIG,
       useValue: {
-        siteName: 'GameMaster Helper',
+        siteName: 'Sport Link',
         siteUrl: environment.siteUrl,
         defaultImage: '/assets/imgs/new-logo.png',
         locale: 'ru_RU',

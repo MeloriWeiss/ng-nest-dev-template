@@ -7,7 +7,7 @@ import {
 import { SvgComponent } from '../svg/svg.component';
 
 @Component({
-  selector: 'wm-map-card',
+  selector: 'sl-map-card',
   imports: [SvgComponent],
   templateUrl: './map-card.component.html',
   styleUrl: './map-card.component.scss',

@@ -5,14 +5,16 @@
 /tmp
 /out-tsc
 /bazel-out
+/generated/prisma
 
-# Node
+# Node & Dependencies
 /node_modules
 /.data
 npm-debug.log
 yarn-error.log
+package-lock.json
 
-# IDEs and editors
+# IDEs, Editors and Tools
 .idea/
 .project
 .classpath
@@ -20,6 +22,9 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+.history/*
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
 
 # Visual Studio Code
 .vscode/*
@@ -27,9 +32,9 @@ yarn-error.log
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
 
-# Miscellaneous
+# Miscellaneous & Cache
+/.angular
 /.angular/cache
 .sass-cache/
 /connect.lock
@@ -37,6 +42,10 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+/.nx/
+
+# Claude AI
+.claude/worktrees
 
 # System files
 .DS_Store
@@ -46,27 +55,16 @@ Thumbs.db
 /docs
 /documentation
 
-# Npm
-package-lock.json
-
-# Yarn
+# Yarn 4 (node-modules Linker Mode)
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-
-#!.yarn/cache
 .pnp.*
 
-/.nx/
-.cursor/rules/nx-rules.mdc
-.github/instructions/nx.instructions.md
-.angular
-
-/generated/prisma
-
+# Environments
 .env
 .env.*
 !.env.example
@@ -74,3 +72,5 @@ package-lock.json
 !docker/examples/.env.prod.example
 !docker/examples/.env.object-storage.minio.prod.example
 !docker/examples/.env.object-storage.r2.prod.example
+
+.angular

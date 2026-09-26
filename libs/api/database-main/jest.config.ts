@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   displayName: 'api-database-main',
   preset: '../../../jest.preset.js',
   testEnvironment: 'node',

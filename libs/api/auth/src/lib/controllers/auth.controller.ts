@@ -26,11 +26,11 @@ import {
 import { Request, Response } from 'express';
 import { LoginDto, RegisterDto } from '../dto';
 import { clearAuthCookies, getUserMeta, setAuthCookies } from '../utils';
-import { GetSessionsDto } from '@wm/shared/auth';
+import { GetSessionsDto } from '@sl/shared/auth';
 import { JwtAccessGuard, JwtRefreshGuard } from '../jwt';
 import { AccessRequest, RefreshRequest } from '../interfaces';
-import { DefaultResponseDto } from '@wm/shared/common';
-import { UserResponseDto } from '@wm/shared/users';
+import { DefaultResponseDto } from '@sl/shared/common';
+import { UserResponseDto } from '@sl/shared/users';
 import { ChangePasswordDto } from '../dto/change-password.dto';
 
 @ApiTags('Auth')

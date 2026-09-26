@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { canActivateAuth } from '@wm/web/auth';
-import { BaseLayoutComponent } from '@wm/web/layout/base';
+import { canActivateAuth } from '@sl/web/auth';
+import { BaseLayoutComponent } from '@sl/web/layout/base';
 
 export const publicRoutes: Routes = [
   {
@@ -23,17 +23,17 @@ export const publicRoutes: Routes = [
       {
         path: 'home',
         loadChildren: () =>
-          import('@wm/web/home').then((module) => module.HomeRoutes),
+          import('@sl/web/home').then((module) => module.HomeRoutes),
       },
       {
         path: 'about',
         loadComponent: () =>
-          import('@wm/web/home').then((module) => module.AboutPageComponent),
+          import('@sl/web/home').then((module) => module.AboutPageComponent),
         data: {
           seo: {
             title: 'О проекте',
             description:
-              'История, миссия и команда GameMaster Helper — платформы для создания карт и миров настольных ролевых игр.',
+              'История, миссия и команда Sport Link.',
             index: true,
             canonicalPath: '/about',
           },
@@ -42,7 +42,7 @@ export const publicRoutes: Routes = [
       {
         path: 'settings',
         loadComponent: () =>
-          import('@wm/web/profile').then(
+          import('@sl/web/profile').then(
             (module) => module.AccountSettingsComponent,
           ),
         canActivate: [canActivateAuth],
@@ -59,7 +59,7 @@ export const publicRoutes: Routes = [
       {
         path: 'profile/:id',
         loadChildren: () =>
-          import('@wm/web/profile').then((module) => module.profileRoutes),
+          import('@sl/web/profile').then((module) => module.profileRoutes),
         canActivate: [canActivateAuth],
         data: {
           seo: {
@@ -69,52 +69,6 @@ export const publicRoutes: Routes = [
           },
         },
       },
-      {
-        path: 'forum',
-        loadChildren: () =>
-          import('@wm/web/forum').then((module) => module.forumRoutes),
-      },
-      {
-        path: 'maps',
-        loadComponent: () =>
-          import('@wm/web/maps').then(
-            (module) => module.MapsCatalogPageComponent,
-          ),
-        data: {
-          seo: {
-            title: 'Карты сообщества',
-            description:
-              'Каталог опубликованных карт сообщества для настольных ролевых игр.',
-            index: true,
-            canonicalPath: '/maps',
-          },
-        },
-      },
-      {
-        path: 'mods',
-        loadChildren: () =>
-          import('@wm/web/mods').then((module) => module.modsRoutes),
-      },
-      {
-        path: 'texture-packs',
-        loadChildren: () =>
-          import('@wm/web/texture-packs').then(
-            (module) => module.texturePacksRoutes,
-          ),
-      },
     ],
-  },
-  {
-    path: 'workshop',
-    loadComponent: () =>
-      import('@wm/web/workshop').then((module) => module.WorkshopPageComponent),
-    canActivate: [canActivateAuth],
-    data: {
-      seo: {
-        title: 'Редактор карты',
-        description: 'Редактор карт GameMaster Helper.',
-        index: false,
-      },
-    },
   },
 ];

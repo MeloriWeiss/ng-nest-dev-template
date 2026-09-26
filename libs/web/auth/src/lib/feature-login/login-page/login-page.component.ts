@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { AuthService, LoginData } from '@wm/web/data-access/auth';
+import { AuthService, LoginData } from '@sl/web/data-access/auth';
 import {
   FormInputComponent,
   LabeledFormFieldWrapperComponent,
-} from '@wm/web/common-ui';
-import { LabeledCheckboxComponent } from '@wm/web/common-ui';
+} from '@sl/web/common-ui';
+import { LabeledCheckboxComponent } from '@sl/web/common-ui';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   FormControl,
@@ -14,11 +14,11 @@ import {
 } from '@angular/forms';
 import { firstValueFrom, tap } from 'rxjs';
 import { validateEmail } from '../../validators';
-import { authConfig } from '@wm/shared/auth';
+import { authConfig } from '@sl/shared/auth';
 import { authReturnUrl } from '../../auth/auth-return-url';
 
 @Component({
-  selector: 'wm-login-page',
+  selector: 'sl-login-page',
   imports: [
     FormInputComponent,
     LabeledFormFieldWrapperComponent,

@@ -16,7 +16,7 @@ export interface PopoverPosition {
 }
 
 @Component({
-  selector: 'wm-popover',
+  selector: 'sl-popover',
   imports: [ClickOutsideDirective],
   templateUrl: './popover.component.html',
   styleUrl: './popover.component.scss',

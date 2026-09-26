@@ -3,7 +3,7 @@ import { AuthService } from './services';
 import { AuthController } from './controllers';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { DatabaseMainModule } from '@wm/api/database-main';
+import { DatabaseMainModule } from '@sl/api/database-main';
 import {
   JwtAccessGuard,
   JwtAccessStrategy,

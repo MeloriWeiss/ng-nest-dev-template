@@ -1,4 +1,4 @@
-<div class="searchable-select" wmClickOutside (wmClickOutside)="close()">
+<div class="searchable-select" slClickOutside (slClickOutside)="close()">
   <button
     class="searchable-select__trigger"
     type="button"
@@ -13,7 +13,7 @@
   >
     <span>{{ selectedOption()?.label ?? placeholder() }}</span>
     <span class="searchable-select__indicator" aria-hidden="true">
-      <ng-content select="[wmSearchableSelectIndicator]">
+      <ng-content select="[slSearchableSelectIndicator]">
         <span class="searchable-select__arrow"></span>
       </ng-content>
     </span>
@@ -38,7 +38,7 @@
             aria-label="Очистить поиск"
             (click)="clearSearch()"
           >
-            <ng-content select="[wmSearchableSelectClearIcon]">×</ng-content>
+            <ng-content select="[slSearchableSelectClearIcon]">×</ng-content>
           </button>
         }
       </div>

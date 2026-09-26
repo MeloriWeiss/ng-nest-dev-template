@@ -4,20 +4,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 /** Resolves a route fragment when its asynchronously loaded target appears. */
 @Directive({
-  selector: '[wmRouteAnchor]',
+  selector: '[slRouteAnchor]',
   standalone: true,
-  host: { '[id]': 'wmRouteAnchor()' },
+  host: { '[id]': 'slRouteAnchor()' },
 })
 export class RouteAnchorDirective {
-  readonly wmRouteAnchor = input.required<string>();
+  readonly slRouteAnchor = input.required<string>();
   readonly #route = inject(ActivatedRoute);
   readonly #router = inject(Router);
   readonly #viewport = inject(ViewportScroller);
 
   constructor() {
     afterNextRender(() => {
-      if (this.#router.lastSuccessfulNavigation?.trigger === 'popstate') return;
-      const anchor = this.wmRouteAnchor();
+      if (this.#router.lastSuccessfulNavigation()?.trigger === 'popstate') return;
+      const anchor = this.slRouteAnchor();
       if (this.#route.snapshot.fragment === anchor) {
         this.#viewport.scrollToAnchor(anchor);
       }

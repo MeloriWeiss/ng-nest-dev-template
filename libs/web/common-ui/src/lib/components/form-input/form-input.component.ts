@@ -17,7 +17,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SvgComponent } from '../svg/svg.component';
 
 @Component({
-  selector: 'wm-form-input',
+  selector: 'sl-form-input',
   imports: [ReactiveFormsModule, SvgComponent],
   templateUrl: './form-input.component.html',
   styleUrl: './form-input.component.scss',

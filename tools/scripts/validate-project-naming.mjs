@@ -4,7 +4,8 @@ import { join, relative, sep } from 'node:path';
 const workspaceRoot = process.cwd();
 const scopedLibraryRoots = ['api', 'web'];
 
-const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
+const readJson = async (path) =>
+  JSON.parse(await readFile(path, { encoding: 'utf8' }));
 
 const findProjectFiles = async (directory) => {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -76,7 +77,7 @@ const tsconfig = await readJson(tsconfigPath);
 const aliases = Object.keys(tsconfig.compilerOptions?.paths ?? {});
 
 for (const scope of scopedLibraryRoots) {
-  const duplicatedScope = `@wm/${scope}/${scope}-`;
+  const duplicatedScope = `@sl/${scope}/${scope}-`;
   const invalidAliases = aliases.filter((alias) =>
     alias.startsWith(duplicatedScope),
   );

@@ -36,14 +36,14 @@
 ## Nx
 
 - Для библиотек в `libs/api/<library>` используй имя Nx-проекта `api-<library>`, а для библиотек в `libs/web/<library>` — `web-<library>`; применяй префикс ко всем платформенным библиотекам, а не только при коллизиях.
-- В путях каталогов и TypeScript-алиасах не повторяй область: используй `libs/api/shared` и `@wm/api/shared`, а не `libs/api/api-shared` и `@wm/api/api-shared`.
+- В путях каталогов и TypeScript-алиасах не повторяй область: используй `libs/api/shared` и `@sl/api/shared`, а не `libs/api/api-shared` и `@sl/api/api-shared`.
 - Общие для API и web библиотеки размещай в `libs/shared` и именуй без платформенного префикса.
 - После добавления или переименования библиотеки запускай `yarn lint:workspace`, который проверяет соглашение автоматически.
 
 ## Nx
 
 - Для библиотек в `libs/api/<library>` используй имя Nx-проекта `api-<library>`, а для библиотек в `libs/web/<library>` — `web-<library>`; применяй префикс ко всем платформенным библиотекам, а не только при коллизиях.
-- В путях каталогов и TypeScript-алиасах не повторяй область: используй `libs/api/shared` и `@wm/api/shared`, а не `libs/api/api-shared` и `@wm/api/api-shared`.
+- В путях каталогов и TypeScript-алиасах не повторяй область: используй `libs/api/shared` и `@sl/api/shared`, а не `libs/api/api-shared` и `@sl/api/api-shared`.
 - Общие для API и web библиотеки размещай в `libs/shared` и именуй без платформенного префикса.
 - После добавления или переименования библиотеки запускай `yarn lint:workspace`, который проверяет соглашение автоматически.
 
