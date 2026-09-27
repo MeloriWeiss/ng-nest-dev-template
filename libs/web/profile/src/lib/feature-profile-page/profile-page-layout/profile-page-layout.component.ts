@@ -28,18 +28,13 @@ import {
   CurrentAccountStore,
   ProfileService,
 } from '@sl/web/data-access/profile';
-import { ProfileSummaryDto } from '@sl/shared/accounts';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { filter, finalize, firstValueFrom, map } from 'rxjs';
+import { ProfileSummaryDto } from '@sl/shared/profiles';
 
 const emptySummary: ProfileSummaryDto = {
-  nickname: 'Профиль',
   avatarUrl: null,
-  bio: null,
-  createdAt: '',
-  likesReceived: 0,
-  publishedMapsCount: 0,
-  publishedTexturePacksCount: 0,
+  createdAt: '2026-07-24T20:55:32.105Z',
 };
 
 @Component({
@@ -74,17 +69,17 @@ export class ProfilePageLayoutComponent {
   );
   readonly profileId = this.#route.parent?.snapshot.paramMap.get('id') ?? 'me';
   readonly isOwnProfile = this.profileId === 'me';
+
+  /* TODO: Табы зависят от активного рабочего контекста.
+           Заполняется по мере готовности модулей */
   readonly profileTabs: readonly TabItem[] = [
-    { id: 'maps', label: 'Карты', routerLink: ['maps'] },
-    {
-      id: 'texture-packs',
-      label: 'Текстур-паки',
-      routerLink: ['texture-packs'],
-    },
+    { id: 'overview', label: 'Обзор', routerLink: ['overview'] },
+    { id: 'deals', label: 'Сделки', routerLink: ['deals'] },
     ...(this.isOwnProfile
-      ? [{ id: 'favourite', label: 'Понравилось', routerLink: ['favourite'] }]
+      ? [{ id: 'documents', label: 'Документы', routerLink: ['documents'] }]
       : []),
   ];
+
   readonly summary = computed(() =>
     this.isOwnProfile
       ? (this.#currentAccountStore.profile() ?? emptySummary)

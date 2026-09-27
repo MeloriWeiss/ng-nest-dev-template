@@ -17,11 +17,8 @@
     "target": "ES2022",
     "module": "ES2022",
     "paths": {
-      "@sl/api/accounts": ["./libs/api/accounts/src/index.ts"],
       "@sl/api/auth": ["./libs/api/auth/src/index.ts"],
       "@sl/api/database-main": ["./libs/api/database-main/src/index.ts"],
-      "@sl/api/forum": ["./libs/api/forum/src/index.ts"],
-      "@sl/api/maps": ["./libs/api/maps/src/index.ts"],
       "@sl/api/shared": ["./libs/api/shared/src/index.ts"],
       "@sl/api/users": ["./libs/api/users/src/index.ts"],
       "@sl/shared/*": ["./libs/shared/shared/src/lib/*"],

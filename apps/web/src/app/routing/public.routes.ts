@@ -8,9 +8,9 @@ export const publicRoutes: Routes = [
     component: BaseLayoutComponent,
     data: {
       seo: {
-        title: 'Карты и инструменты для настольных ролевых игр',
+        title: 'SportLink — платформа для сделок спортсменов и рекламодателей',
         description:
-          'Создавайте карты для НРИ, публикуйте их и используйте готовые наборы текстур в GameMaster Helper.',
+          'SportLink помогает спортсменам и рекламодателям описать рекламные возможности, подобрать партнера, согласовать условия, провести оплату и подтвердить результат.',
         index: true,
       },
     },
@@ -31,9 +31,9 @@ export const publicRoutes: Routes = [
           import('@sl/web/home').then((module) => module.AboutPageComponent),
         data: {
           seo: {
-            title: 'О проекте',
+            title: 'О платформе',
             description:
-              'История, миссия и команда Sport Link.',
+              'Как SportLink связывает спортсменов и рекламодателей: управляемые сделки, права, сроки и доказательства исполнения.',
             index: true,
             canonicalPath: '/about',
           },
@@ -50,7 +50,7 @@ export const publicRoutes: Routes = [
           seo: {
             title: 'Настройки аккаунта',
             description:
-              'Смена пароля и управление сессиями GameMaster Helper.',
+              'Контакты, пароль, активные сессии и согласия в Sport Link.',
             index: false,
             canonicalPath: '/settings',
           },
@@ -63,8 +63,8 @@ export const publicRoutes: Routes = [
         canActivate: [canActivateAuth],
         data: {
           seo: {
-            title: 'Профиль пользователя',
-            description: 'Профиль пользователя GameMaster Helper.',
+            title: 'Профиль',
+            description: 'Публичный профиль участника Sport Link.',
             index: false,
           },
         },

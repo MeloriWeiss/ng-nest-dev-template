@@ -18,7 +18,7 @@ export const authRoutes: Routes = [
         data: {
           seo: {
             title: 'Вход',
-            description: 'Вход в аккаунт GameMaster Helper.',
+            description: 'Вход в аккаунт Sport Link.',
             index: false,
           },
         },
@@ -29,7 +29,7 @@ export const authRoutes: Routes = [
         data: {
           seo: {
             title: 'Регистрация',
-            description: 'Создание аккаунта GameMaster Helper.',
+            description: 'Создание аккаунта Sport Link.',
             index: false,
           },
         },

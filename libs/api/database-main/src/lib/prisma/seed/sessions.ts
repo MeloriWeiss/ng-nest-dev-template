@@ -1,10 +1,10 @@
 import { SeedPrismaClient } from './client';
 import { daysAgo, daysFromNow } from './dates';
-import { SeedAccount } from './types';
+import { SeedUserResult } from './types';
 
 export async function seedSessions(
   prisma: SeedPrismaClient,
-  accounts: SeedAccount[],
+  accounts: SeedUserResult[],
 ) {
   for (const [index, account] of accounts.entries()) {
     await prisma.userSession.create({

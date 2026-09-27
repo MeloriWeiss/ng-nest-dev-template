@@ -1,115 +1,188 @@
 import * as bcrypt from 'bcrypt';
 import { SeedPrismaClient } from './client';
 import { daysAgo } from './dates';
-import { SeedAccount } from './types';
+import { SeedUserResult } from './types';
+import type { PlatformRole } from '../../generated/prisma';
 
 export const SEED_PASSWORD = 'Admin123';
 
-const users = [
+interface SeedUserInput {
+  email: string;
+  phone?: string;
+  roles: PlatformRole[];
+  firstName: string;
+  lastName: string;
+  middleName?: string;
+  birthDate?: string;
+  bio?: string;
+  verified?: boolean;
+}
+
+const users: SeedUserInput[] = [
+  // Платформенный персонал
   {
     email: 'admin@example.com',
-    username: 'admin',
-    nickname: 'Хранитель Атласа',
+    phone: '+79990000000',
+    roles: ['SUPER_ADMIN'],
     firstName: 'Александр',
-    lastName: 'Картографов',
-    bio: 'Администратор и автор демонстрационных миров.',
+    lastName: 'Админов',
+    bio: 'Суперадминистратор платформы.',
+    verified: true,
   },
   {
-    email: 'user@example.com',
-    username: 'user',
-    nickname: 'Странствующий мастер',
+    email: 'moderator@example.com',
+    roles: ['MODERATOR'],
     firstName: 'Мария',
-    lastName: 'Ветрова',
-    bio: 'Веду кампании и собираю красивые карты.',
+    lastName: 'Модератова',
+    bio: 'Модерация профилей, услуг и кейсов.',
+    verified: true,
   },
   {
-    email: 'dwarf@example.com',
-    username: 'dwarf_master',
-    nickname: 'Дварфийский архитектор',
-    firstName: 'Борис',
-    lastName: 'Каменный',
-    bio: 'Люблю подземелья, шахты и суровые горные крепости.',
+    email: 'support@example.com',
+    roles: ['SUPPORT'],
+    firstName: 'Ольга',
+    lastName: 'Поддержкина',
+    bio: 'Первая линия поддержки участников.',
+    verified: true,
   },
   {
-    email: 'elf@example.com',
-    username: 'elven_mapper',
-    nickname: 'Лесная разведчица',
-    firstName: 'Элина',
-    lastName: 'Листопад',
-    bio: 'Создаю лесные поселения и природные ландшафты.',
-  },
-  {
-    email: 'sea@example.com',
-    username: 'sea_wolf',
-    nickname: 'Морской волк',
-    firstName: 'Виктор',
-    lastName: 'Штормов',
-    bio: 'Острова, морские пути и пиратские приключения.',
-  },
-  {
-    email: 'desert@example.com',
-    username: 'desert_fox',
-    nickname: 'Песчаная лисица',
-    firstName: 'Алина',
-    lastName: 'Солнечная',
-    bio: 'Рисую пустыни, караванные маршруты и древние руины.',
-  },
-  {
-    email: 'north@example.com',
-    username: 'north_guard',
-    nickname: 'Страж Севера',
+    email: 'arbiter@example.com',
+    roles: ['ARBITER'],
     firstName: 'Игорь',
-    lastName: 'Северный',
-    bio: 'Снежные земли и опасные перевалы.',
+    lastName: 'Арбитров',
+    bio: 'Рассмотрение споров и апелляций.',
+    verified: true,
   },
   {
-    email: 'newcomer@example.com',
-    username: 'newcomer',
-    nickname: 'Начинающий мастер',
-    firstName: 'Олег',
-    lastName: 'Новиков',
-    bio: null,
+    email: 'lawyer@example.com',
+    roles: ['LAWYER'],
+    firstName: 'Елена',
+    lastName: 'Юристова',
+    bio: 'Юридическая проверка шаблонов и прав.',
+    verified: true,
   },
-] as const;
+  {
+    email: 'finance@example.com',
+    roles: ['FINANCIAL_OPERATOR'],
+    firstName: 'Виктор',
+    lastName: 'Финансов',
+    bio: 'Сверка платежей, выплаты и возвраты.',
+    verified: true,
+  },
+  {
+    email: 'content@example.com',
+    roles: ['CONTENT_MANAGER'],
+    firstName: 'Олег',
+    lastName: 'Контентов',
+    bio: 'Справочники, обучающие материалы, продвижение.',
+    verified: true,
+  },
+  {
+    email: 'fund@example.com',
+    roles: ['FUND_REPRESENTATIVE'],
+    firstName: 'Павел',
+    lastName: 'Фондов',
+    bio: 'Представитель фонда поддержки спорта.',
+    verified: true,
+  },
 
-export async function seedUsers(prisma: SeedPrismaClient) {
+  // Продуктовые роли (без платформенных прав)
+  {
+    email: 'athlete@example.com',
+    phone: '+79990000001',
+    roles: [],
+    firstName: 'Дмитрий',
+    lastName: 'Спортсменов',
+    birthDate: '1995-03-15',
+    bio: 'Профессиональный атлет. Рекламные интеграции.',
+    verified: true,
+  },
+  {
+    email: 'athlete2@example.com',
+    roles: [],
+    firstName: 'Анна',
+    lastName: 'Скороходова',
+    birthDate: '1998-07-22',
+    bio: 'Лёгкая атлетика, амбассадорство брендов.',
+    verified: false,
+  },
+  {
+    email: 'athlete3@example.com',
+    roles: [],
+    firstName: 'Николай',
+    lastName: 'Пловцов',
+    birthDate: '2000-11-02',
+    bio: 'Плавание, корпоративные встречи.',
+    verified: false,
+  },
+  {
+    email: 'advertiser@example.com',
+    phone: '+79990000002',
+    roles: [],
+    firstName: 'Сергей',
+    lastName: 'Рекламов',
+    bio: 'Маркетинг в спортивной одежде.',
+    verified: true,
+  },
+  {
+    email: 'advertiser2@example.com',
+    roles: [],
+    firstName: 'Татьяна',
+    lastName: 'Брендова',
+    bio: 'Напитки и спортивное питание.',
+    verified: true,
+  },
+  {
+    email: 'agent@example.com',
+    roles: [],
+    firstName: 'Андрей',
+    lastName: 'Агентов',
+    bio: 'Представление интересов спортсменов.',
+    verified: true,
+  },
+  {
+    email: 'parent@example.com',
+    roles: [],
+    firstName: 'Ирина',
+    lastName: 'Родителева',
+    bio: 'Законный представитель несовершеннолетнего спортсмена.',
+    verified: false,
+  },
+];
+
+export async function seedUsers(
+  prisma: SeedPrismaClient,
+): Promise<SeedUserResult[]> {
   const passwordHash = await bcrypt.hash(SEED_PASSWORD, 10);
-  const result: SeedAccount[] = [];
+  const result: SeedUserResult[] = [];
 
-  for (const [index, userData] of users.entries()) {
+  for (const [index, data] of users.entries()) {
     const user = await prisma.user.create({
       data: {
-        email: userData.email,
-        username: userData.username,
+        email: data.email,
+        phone: data.phone ?? null,
         passwordHash,
-        role: index === 0 ? 'SUPER_ADMIN' : 'USER',
-        personalAccount: {
-          create: {
-            nickname: userData.nickname,
-            firstName: userData.firstName,
-            lastName: userData.lastName,
-            phoneNumber: index < 2 ? `+7999000000${index}` : null,
-            birthDate: index < 2 ? `199${index}-0${index + 1}-15` : null,
-            bio: userData.bio,
-            avatarUrl: `seed/avatars/${userData.username}.png`,
-            createdAt: daysAgo(180 - index * 12),
-          },
-        },
+        firstName: data.firstName,
+        lastName: data.lastName,
+        middleName: data.middleName ?? null,
+        birthDate: data.birthDate ? new Date(data.birthDate) : null,
+        bio: data.bio ?? null,
+        roles: data.roles,
+        termsVersion: '1.0',
+        privacyVersion: '1.0',
+        emailVerifiedAt: data.verified ? new Date() : null,
+        createdAt: daysAgo(180 - index * 7),
       },
-      include: { personalAccount: true },
     });
-    if (!user.personalAccount)
-      throw new Error(`Account missing for ${user.email}`);
+
     result.push({
-      userId: user.id,
-      accountId: user.personalAccount.id,
-      username: user.username,
-      nickname: user.personalAccount.nickname,
+      nickname: "", username: "",
+      userId: Number(user.id),
+      email: user.email,
+      roles: user.roles
     });
   }
 
-  console.log(
-    `Users and accounts: ${result.length} (password: ${SEED_PASSWORD})`,
-  );
+  console.log(`Users: ${result.length} (password: ${SEED_PASSWORD})`);
   return result;
 }

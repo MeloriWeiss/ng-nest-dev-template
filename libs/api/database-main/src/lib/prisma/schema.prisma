@@ -7,285 +7,238 @@ datasource db {
   provider = "postgresql"
 }
 
+// ─── Identity ───────────────────────────────────────────────────────────
+
 model User {
-  id           Int    @id @default(autoincrement())
-  email        String @unique
-  username     String @unique
-  passwordHash String @map("password_hash")
-  role         UserRole @default(USER)
-  status       UserStatus @default(ACTIVE)
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @default(now()) @updatedAt @map("updated_at")
+  id           String  @id @default(uuid())
+  email        String  @unique
+  phone        String? @unique
+  passwordHash String  @map("password_hash")
 
-  personalAccount PersonalAccount? @relation("UserPersonalAccount")
-  sessions        UserSession[]
-  auditLogs       AdminAuditLog[] @relation("AuditActor")
+  // Profile fields (M04.1, M02.1). Replaces old PersonalAccount.
+  firstName  String?   @map("first_name")
+  lastName   String?   @map("last_name")
+  middleName String?   @map("middle_name")
+  avatarUrl  String?   @map("avatar_url")
+  birthDate  DateTime? @map("birth_date")
+  bio        String?
 
+  status UserStatus @default(ACTIVE)
+
+  // Consents and terms versioning (M01.1)
+  termsVersion    String?   @map("terms_version")
+  privacyVersion  String?   @map("privacy_version")
+  emailVerifiedAt DateTime? @map("email_verified_at")
+  phoneVerifiedAt DateTime? @map("phone_verified_at")
+
+  lastLoginAt DateTime? @map("last_login_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  sessions      UserSession[]
+  platformRoles UserPlatformRole[]
+  memberships   Membership[]
+  verifications Verification[]
+  auditLogs     AuditLog[] @relation("AuditActor")
+
+  @@index([status, createdAt])
   @@map("users")
-}
-
-enum UserRole {
-  USER
-  ADMIN
-  SUPER_ADMIN
 }
 
 enum UserStatus {
   ACTIVE
   BLOCKED
-}
-
-model AdminAuditLog {
-  id         Int      @id @default(autoincrement())
-  action     String
-  targetType String   @map("target_type")
-  targetId   String   @map("target_id")
-  details    Json?
-  createdAt  DateTime @default(now()) @map("created_at")
-
-  actorId Int  @map("actor_id")
-  actor   User @relation("AuditActor", fields: [actorId], references: [id], onDelete: Restrict)
-
-  @@index([createdAt])
-  @@index([actorId, createdAt])
-  @@map("admin_audit_logs")
-}
-
-model SiteVisit {
-  id        BigInt   @id @default(autoincrement())
-  sessionId String   @unique @map("session_id") @db.Uuid
-  visitorId String?  @map("visitor_id") @db.Uuid
-  createdAt DateTime @default(now()) @map("created_at")
-
-  @@index([createdAt])
-  @@index([visitorId, createdAt])
-  @@map("site_visits")
-}
-
-model Map {
-  id            Int     @id @default(autoincrement())
-  name          String
-  body          String
-  description   String?
-  isPublished   Boolean @default(false) @map("is_published")
-  isHidden      Boolean @default(false) @map("is_hidden")
-  likesCount    Int     @default(0) @map("likes_count")
-  commentsCount Int     @default(0) @map("comments_count")
-  accountId     Int     @map("account_id")
-
-  // relations
-  authorAccount PersonalAccount @relation(fields: [accountId], references: [id])
-  comments      MapComment[]
-  likes         MapLike[]
-
-  @@map("maps")
-}
-
-model Texture {
-  id        String   @id @default(uuid())
-  name      String
-  objectKey String   @unique @map("object_key")
-  mimeType  String   @map("mime_type")
-  size      Int
-  width     Int?
-  height    Int?
-  createdAt DateTime @default(now()) @map("created_at")
-
-  accountId Int             @map("account_id")
-  owner     PersonalAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  packId    String          @map("pack_id")
-  pack      TexturePack     @relation(fields: [packId], references: [id], onDelete: Cascade)
-
-  @@index([accountId, createdAt])
-  @@index([packId, createdAt])
-  @@map("textures")
-}
-
-model TexturePack {
-  id          String    @id @default(uuid())
-  name        String
-  description String?
-  isPublished Boolean   @default(false) @map("is_published")
-  isHidden    Boolean   @default(false) @map("is_hidden")
-  likesCount  Int       @default(0) @map("likes_count")
-  publishedAt DateTime? @map("published_at")
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt @map("updated_at")
-
-  accountId Int               @map("account_id")
-  owner     PersonalAccount   @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  textures  Texture[]
-  likes     TexturePackLike[]
-
-  @@index([accountId, updatedAt])
-  @@index([isPublished, publishedAt])
-  @@map("texture_packs")
-}
-
-model MapComment {
-  id       Int    @id @default(autoincrement())
-  comment  String
-  mapId    Int    @map("map_id")
-  authorId Int    @map("author_id")
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  // relations
-  map           Map             @relation(fields: [mapId], references: [id])
-  authorAccount PersonalAccount @relation(fields: [authorId], references: [id])
-
-  @@map("map_comments")
-}
-
-model MapLike {
-  accountId Int      @map("account_id")
-  mapId     Int      @map("map_id")
-  createdAt DateTime @default(now()) @map("created_at")
-
-  account PersonalAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  map     Map             @relation(fields: [mapId], references: [id], onDelete: Cascade)
-
-  @@id([accountId, mapId])
-  @@index([accountId, createdAt])
-  @@map("map_likes")
-}
-
-model TexturePackLike {
-  accountId     Int      @map("account_id")
-  texturePackId String   @map("texture_pack_id")
-  createdAt     DateTime @default(now()) @map("created_at")
-
-  account     PersonalAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  texturePack TexturePack     @relation(fields: [texturePackId], references: [id], onDelete: Cascade)
-
-  @@id([accountId, texturePackId])
-  @@index([accountId, createdAt])
-  @@map("texture_pack_likes")
-}
-
-model Forum {
-  id            Int    @id @default(autoincrement())
-  title         String
-  post          String
-  likesCount    Int    @default(0) @map("likes_count")
-  commentsCount Int    @default(0) @map("comments_count")
-  authorId      Int    @map("author_id")
-  categoryId    Int    @map("category_id")
-  isHidden      Boolean @default(false) @map("is_hidden")
-  isPinned      Boolean @default(false) @map("is_pinned")
-  isClosed      Boolean @default(false) @map("is_closed")
-  lastActivityAt DateTime @default(now()) @map("last_activity_at")
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  // relations
-  authorAccount PersonalAccount @relation(fields: [authorId], references: [id])
-  category      ForumCategory   @relation(fields: [categoryId], references: [id])
-  comments      ForumComment[]
-  likes         ForumLike[]
-
-  @@index([categoryId, createdAt])
-  @@index([isHidden, isPinned, lastActivityAt])
-  @@map("forums")
-}
-
-model ForumCategory {
-  id          Int     @id @default(autoincrement())
-  slug        String  @unique
-  title       String
-  description String?
-  sortOrder   Int     @default(0) @map("sort_order")
-
-  discussions Forum[]
-
-  @@map("forum_categories")
-}
-
-model ForumComment {
-  id       Int    @id @default(autoincrement())
-  comment  String
-  forumId  Int    @map("forum_id")
-  authorId Int    @map("author_id")
-  parentId Int?   @map("parent_id")
-  isHidden Boolean @default(false) @map("is_hidden")
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  // relations
-  forum         Forum           @relation(fields: [forumId], references: [id], onDelete: Cascade)
-  authorAccount PersonalAccount @relation(fields: [authorId], references: [id])
-  parent        ForumComment?   @relation("ForumCommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies       ForumComment[]  @relation("ForumCommentReplies")
-
-  @@index([forumId, createdAt])
-  @@index([parentId])
-  @@map("forum_comments")
-}
-
-model ForumLike {
-  accountId Int      @map("account_id")
-  forumId   Int      @map("forum_id")
-  createdAt DateTime @default(now()) @map("created_at")
-
-  account PersonalAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  forum   Forum           @relation(fields: [forumId], references: [id], onDelete: Cascade)
-
-  @@id([accountId, forumId])
-  @@index([accountId, createdAt])
-  @@map("forum_likes")
-}
-
-model PersonalAccount {
-  id Int @id @default(autoincrement())
-
-  nickname String
-
-  firstName  String? @map("first_name")
-  lastName   String? @map("last_name")
-  middleName String? @map("middle_name")
-
-  phoneNumber String? @map("phone_number")
-  birthDate   String? @map("birth_date")
-  bio         String?
-
-  avatarUrl String? @map("avatar_url")
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  // relations
-  userId Int  @unique @map("user_id")
-  user   User @relation("UserPersonalAccount", fields: [userId], references: [id], onDelete: Cascade)
-
-  maps              Map[]
-  mapComments       MapComment[]
-  forums            Forum[]
-  forumComments     ForumComment[]
-  forumLikes        ForumLike[]
-  textures          Texture[]
-  texturePacks      TexturePack[]
-  likedMaps         MapLike[]
-  likedTexturePacks TexturePackLike[]
-
-  @@map("accounts")
+  DELETED
 }
 
 model UserSession {
-  id         Int      @id @default(autoincrement())
+  id         String   @id @default(uuid())
   tokenHash  String   @map("token_hash")
   userAgent  String?  @map("user_agent")
   ip         String?
   lastUsedAt DateTime @default(now()) @map("last_used_at")
   expiresAt  DateTime @map("expires_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+  @@map("user_sessions")
+}
+
+// ─── Platform staff roles (M02, §2) ─────────────────────────────────────
+
+model UserPlatformRole {
+  id     String @id @default(uuid())
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  role PlatformRole
+
+  grantedById String?   @map("granted_by_id")
+  grantedAt   DateTime  @default(now()) @map("granted_at")
+  revokedAt   DateTime? @map("revoked_at")
+
+  @@unique([userId, role])
+  @@index([role, revokedAt])
+  @@map("user_platform_roles")
+}
+
+enum PlatformRole {
+  SUPER_ADMIN
+  MODERATOR
+  SUPPORT
+  ARBITER
+  LAWYER
+  FINANCIAL_OPERATOR
+  CONTENT_MANAGER
+  FUND_REPRESENTATIVE
+}
+
+// ─── Organizations & team access (M02) ──────────────────────────────────
+
+model Organization {
+  id          String @id @default(uuid())
+  legalName   String @map("legal_name")
+  displayName String @map("display_name")
+  inn         String @unique
+  ogrn        String?
+  kind        OrganizationKind
+
+  // Snapshot of the last requisites check (M02.1). Requisites ≠ mandate.
+  requisitesCheckedAt DateTime? @map("requisites_checked_at")
+  requisitesSource    String?   @map("requisites_source")
+
+  status OrganizationStatus @default(ACTIVE)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  memberships Membership[]
+
+  @@index([status, kind])
+  @@map("organizations")
+}
+
+enum OrganizationKind {
+  ADVERTISER
+  AGENCY
+  ATHLETE_ENTITY
+  FOUNDATION
+}
+
+enum OrganizationStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+model Membership {
+  id String @id @default(uuid())
+
+  userId         String       @map("user_id")
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId String       @map("organization_id")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  role        MembershipRole
+  // Fine-grained permissions on top of role, e.g. deal:sign, payout:approve.
+  permissions String[]        @default([])
+  status      MembershipStatus @default(PENDING)
+
+  invitedById String?   @map("invited_by_id")
+  invitedAt   DateTime? @map("invited_at")
+  acceptedAt  DateTime? @map("accepted_at")
+  revokedAt   DateTime? @map("revoked_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([userId, organizationId, role])
+  @@index([organizationId, status])
+  @@map("memberships")
+}
+
+enum MembershipRole {
+  OWNER
+  MARKETER
+  APPROVER
+  ACCOUNTANT
+  SIGNER
+  AGENT
+  LEGAL_REPRESENTATIVE
+}
+
+enum MembershipStatus {
+  PENDING
+  ACTIVE
+  REVOKED
+}
+
+// ─── Verification (M03) ─────────────────────────────────────────────────
+
+model Verification {
+  id String @id @default(uuid())
+
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  kind   VerificationKind
+  status VerificationStatus @default(NOT_STARTED)
+
+  // Object keys in S3-compatible storage; metadata only in DB.
+  evidenceKeys String[] @default([]) @map("evidence_keys")
+
+  reviewedById String?   @map("reviewed_by_id")
+  reviewedAt   DateTime? @map("reviewed_at")
+  reason       String?
+
+  expiresAt DateTime? @map("expires_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([userId, kind])
+  @@index([status, expiresAt])
+  @@map("verifications")
+}
+
+enum VerificationKind {
+  ATHLETE
+  AGE
+  LEGAL_ENTITY
+  SELF_EMPLOYED
+  AGENT_MANDATE
+  LEGAL_REPRESENTATIVE
+  FUND
+}
+
+enum VerificationStatus {
+  NOT_STARTED
+  IN_REVIEW
+  NEEDS_INFO
+  APPROVED
+  REJECTED
+  EXPIRED
+}
+
+// ─── Audit (M23.3, §4 TZ) ───────────────────────────────────────────────
+
+model AuditLog {
+  id         String  @id @default(uuid())
+  action     String
+  targetType String  @map("target_type")
+  targetId   String  @map("target_id")
+  details    Json?
+  reason     String?
+
+  actorId String? @map("actor_id")
+  actor   User?   @relation("AuditActor", fields: [actorId], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now()) @map("created_at")
 
-  // relations
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId Int  @map("user_id")
-
-  @@map("sessions")
+  @@index([createdAt])
+  @@index([actorId, createdAt])
+  @@index([targetType, targetId])
+  @@map("audit_logs")
 }

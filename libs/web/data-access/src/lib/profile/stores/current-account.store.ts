@@ -1,9 +1,9 @@
 import { computed, DestroyRef, inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ProfileSummaryDto } from '@sl/shared/accounts';
 import { UserResponseDto } from '@sl/shared/users';
 import { BaseStore } from '../../store';
 import { ProfileService } from '../services';
+import { ProfileSummaryDto } from '@sl/shared/profiles';
 
 interface CurrentAccountState {
   user: UserResponseDto | null;

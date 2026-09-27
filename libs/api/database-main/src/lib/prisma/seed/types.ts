@@ -1,6 +1,6 @@
-export interface SeedAccount {
+export interface SeedUserResult {
   userId: number;
-  accountId: number;
   username: string;
   nickname: string;
+  email: string;
 }
