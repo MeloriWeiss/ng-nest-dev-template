@@ -1,0 +1,19 @@
+{
+  "name": "web-auth",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/web/auth/src",
+  "prefix": "sl",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "test": {
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}",
+        "{workspaceRoot}\\coverage\\libs\\web\\auth"
+      ]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

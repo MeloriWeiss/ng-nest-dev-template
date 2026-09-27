@@ -1,0 +1,33 @@
+{
+  "name": "api-database-main",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/database-main/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "test": {
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}",
+        "{workspaceRoot}\\coverage\\libs\\api\\database-main"
+      ]
+    },
+    "migrate": {
+      "command": "prisma migrate dev --config=libs/api/database-main/src/lib/prisma.config.ts"
+    },
+    "deploy": {
+      "command": "prisma migrate deploy --config=libs/api/database-main/src/lib/prisma.config.ts"
+    },
+    "generate": {
+      "command": "prisma generate --config=libs/api/database-main/src/lib/prisma.config.ts"
+    },
+    "seed": {
+      "command": "prisma db seed --config=libs/api/database-main/src/lib/prisma.config.ts"
+    },
+    "create-super-admin": {
+      "command": "tsx --tsconfig tsconfig.base.json libs/api/database-main/src/lib/prisma/create-super-admin.ts"
+    },
+    "push": {
+      "command": "prisma db push --config=libs/api/database-main/src/lib/prisma.config.ts"
+    }
+  }
+}

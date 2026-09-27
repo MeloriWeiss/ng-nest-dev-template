@@ -1,0 +1,13 @@
+@use 'functions' as *;
+@use 'media' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  padding-bottom: fluid(122, 101);
+  padding-top: fluid(68, 50);
+}
+
+.profile-container {
+  width: fluid(1150, 370);
+}

@@ -1,0 +1,76 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+/generated/prisma
+
+# Node & Dependencies
+/node_modules
+/.data
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# IDEs, Editors and Tools
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.history/*
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Miscellaneous & Cache
+/.angular
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+/.nx/
+
+# Claude AI
+.claude/worktrees
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Docs
+/docs
+/documentation
+
+# Yarn 4 (node-modules Linker Mode)
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# Environments
+.env
+.env.*
+!.env.example
+!docker/examples/
+!docker/examples/.env.prod.example
+!docker/examples/.env.object-storage.minio.prod.example
+!docker/examples/.env.object-storage.r2.prod.example
+
+.angular

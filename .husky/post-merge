@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+sh scripts/setup-env.sh
+
+yarn docs:gen

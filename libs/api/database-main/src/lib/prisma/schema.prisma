@@ -1,0 +1,291 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  username     String     @unique
+  passwordHash String     @map("password_hash")
+  role         UserRole   @default(USER)
+  status       UserStatus @default(ACTIVE)
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @default(now()) @updatedAt @map("updated_at")
+
+  personalAccount PersonalAccount? @relation("UserPersonalAccount")
+  sessions        UserSession[]
+  auditLogs       AdminAuditLog[]  @relation("AuditActor")
+
+  @@map("users")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+}
+
+model AdminAuditLog {
+  id         Int      @id @default(autoincrement())
+  action     String
+  targetType String   @map("target_type")
+  targetId   String   @map("target_id")
+  details    Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  actorId Int  @map("actor_id")
+  actor   User @relation("AuditActor", fields: [actorId], references: [id], onDelete: Restrict)
+
+  @@index([createdAt])
+  @@index([actorId, createdAt])
+  @@map("admin_audit_logs")
+}
+
+model SiteVisit {
+  id        BigInt   @id @default(autoincrement())
+  sessionId String   @unique @map("session_id") @db.Uuid
+  visitorId String?  @map("visitor_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([createdAt])
+  @@index([visitorId, createdAt])
+  @@map("site_visits")
+}
+
+model Map {
+  id            Int     @id @default(autoincrement())
+  name          String
+  body          String
+  description   String?
+  isPublished   Boolean @default(false) @map("is_published")
+  isHidden      Boolean @default(false) @map("is_hidden")
+  likesCount    Int     @default(0) @map("likes_count")
+  commentsCount Int     @default(0) @map("comments_count")
+  accountId     Int     @map("account_id")
+
+  // relations
+  authorAccount PersonalAccount @relation(fields: [accountId], references: [id])
+  comments      MapComment[]
+  likes         MapLike[]
+
+  @@map("maps")
+}
+
+model Texture {
+  id        String   @id @default(uuid())
+  name      String
+  objectKey String   @unique @map("object_key")
+  mimeType  String   @map("mime_type")
+  size      Int
+  width     Int?
+  height    Int?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  accountId Int             @map("account_id")
+  owner     PersonalAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  packId    String          @map("pack_id")
+  pack      TexturePack     @relation(fields: [packId], references: [id], onDelete: Cascade)
+
+  @@index([accountId, createdAt])
+  @@index([packId, createdAt])
+  @@map("textures")
+}
+
+model TexturePack {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  isPublished Boolean   @default(false) @map("is_published")
+  isHidden    Boolean   @default(false) @map("is_hidden")
+  likesCount  Int       @default(0) @map("likes_count")
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  accountId Int               @map("account_id")
+  owner     PersonalAccount   @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  textures  Texture[]
+  likes     TexturePackLike[]
+
+  @@index([accountId, updatedAt])
+  @@index([isPublished, publishedAt])
+  @@map("texture_packs")
+}
+
+model MapComment {
+  id       Int    @id @default(autoincrement())
+  comment  String
+  mapId    Int    @map("map_id")
+  authorId Int    @map("author_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // relations
+  map           Map             @relation(fields: [mapId], references: [id])
+  authorAccount PersonalAccount @relation(fields: [authorId], references: [id])
+
+  @@map("map_comments")
+}
+
+model MapLike {
+  accountId Int      @map("account_id")
+  mapId     Int      @map("map_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  account PersonalAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  map     Map             @relation(fields: [mapId], references: [id], onDelete: Cascade)
+
+  @@id([accountId, mapId])
+  @@index([accountId, createdAt])
+  @@map("map_likes")
+}
+
+model TexturePackLike {
+  accountId     Int      @map("account_id")
+  texturePackId String   @map("texture_pack_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  account     PersonalAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  texturePack TexturePack     @relation(fields: [texturePackId], references: [id], onDelete: Cascade)
+
+  @@id([accountId, texturePackId])
+  @@index([accountId, createdAt])
+  @@map("texture_pack_likes")
+}
+
+model Forum {
+  id             Int      @id @default(autoincrement())
+  title          String
+  post           String
+  likesCount     Int      @default(0) @map("likes_count")
+  commentsCount  Int      @default(0) @map("comments_count")
+  authorId       Int      @map("author_id")
+  categoryId     Int      @map("category_id")
+  isHidden       Boolean  @default(false) @map("is_hidden")
+  isPinned       Boolean  @default(false) @map("is_pinned")
+  isClosed       Boolean  @default(false) @map("is_closed")
+  lastActivityAt DateTime @default(now()) @map("last_activity_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // relations
+  authorAccount PersonalAccount @relation(fields: [authorId], references: [id])
+  category      ForumCategory   @relation(fields: [categoryId], references: [id])
+  comments      ForumComment[]
+  likes         ForumLike[]
+
+  @@index([categoryId, createdAt])
+  @@index([isHidden, isPinned, lastActivityAt])
+  @@map("forums")
+}
+
+model ForumCategory {
+  id          Int     @id @default(autoincrement())
+  slug        String  @unique
+  title       String
+  description String?
+  sortOrder   Int     @default(0) @map("sort_order")
+
+  discussions Forum[]
+
+  @@map("forum_categories")
+}
+
+model ForumComment {
+  id       Int     @id @default(autoincrement())
+  comment  String
+  forumId  Int     @map("forum_id")
+  authorId Int     @map("author_id")
+  parentId Int?    @map("parent_id")
+  isHidden Boolean @default(false) @map("is_hidden")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // relations
+  forum         Forum           @relation(fields: [forumId], references: [id], onDelete: Cascade)
+  authorAccount PersonalAccount @relation(fields: [authorId], references: [id])
+  parent        ForumComment?   @relation("ForumCommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies       ForumComment[]  @relation("ForumCommentReplies")
+
+  @@index([forumId, createdAt])
+  @@index([parentId])
+  @@map("forum_comments")
+}
+
+model ForumLike {
+  accountId Int      @map("account_id")
+  forumId   Int      @map("forum_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  account PersonalAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  forum   Forum           @relation(fields: [forumId], references: [id], onDelete: Cascade)
+
+  @@id([accountId, forumId])
+  @@index([accountId, createdAt])
+  @@map("forum_likes")
+}
+
+model PersonalAccount {
+  id Int @id @default(autoincrement())
+
+  nickname String
+
+  firstName  String? @map("first_name")
+  lastName   String? @map("last_name")
+  middleName String? @map("middle_name")
+
+  phoneNumber String? @map("phone_number")
+  birthDate   String? @map("birth_date")
+  bio         String?
+
+  avatarUrl String? @map("avatar_url")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // relations
+  userId Int  @unique @map("user_id")
+  user   User @relation("UserPersonalAccount", fields: [userId], references: [id], onDelete: Cascade)
+
+  maps              Map[]
+  mapComments       MapComment[]
+  forums            Forum[]
+  forumComments     ForumComment[]
+  forumLikes        ForumLike[]
+  textures          Texture[]
+  texturePacks      TexturePack[]
+  likedMaps         MapLike[]
+  likedTexturePacks TexturePackLike[]
+
+  @@map("accounts")
+}
+
+model UserSession {
+  id         Int      @id @default(autoincrement())
+  tokenHash  String   @map("token_hash")
+  userAgent  String?  @map("user_agent")
+  ip         String?
+  lastUsedAt DateTime @default(now()) @map("last_used_at")
+  expiresAt  DateTime @map("expires_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // relations
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int  @map("user_id")
+
+  @@map("sessions")
+}
